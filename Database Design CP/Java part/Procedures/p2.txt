@@ -1,0 +1,19 @@
+create or replace procedure pLogin(plogin VARCHAR2, ppswd VARCHAR2, p_id out INTEGER, ppassed out BOOLEAN) is
+temp VARCHAR2(300);
+temp_id INTEGER;
+begin
+  if ((TRIM(plogin) IS NULL or LENGTH(TRIM(plogin)) < 1) OR (TRIM(ppswd) IS NULL or LENGTH(TRIM(ppswd)) < 1)) then
+    RAISE_APPLICATION_ERROR(-20, 'Please, fill both login and password fields');
+  end if;
+  
+ select USERS.PASSWORD_HASH, USERS.USER_ID into temp, temp_id from USERS where UPPER(TRIM(LOGIN)) = UPPER(TRIM(plogin));
+   if (temp = DBMS_CRYPTO.Hash ( UTL_I18N.STRING_TO_RAW (ppswd, 'AL32UTF8'), 2)) then
+     p_id := temp_id;
+     ppassed := 1;
+   else p_id:=temp_id;
+     ppassed:= 0;
+      end if;
+
+  
+  
+end pLogin;

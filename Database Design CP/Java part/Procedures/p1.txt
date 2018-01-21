@@ -1,0 +1,28 @@
+create or replace procedure pAddUser(plogin VARCHAR2, pemail VARCHAR2,  pname VARCHAR2, pswd VARCHAR2, p_id out INTEGER) is
+ i integer;
+ j integer;
+ plogin_temp VARCHAR2(300);
+ phash VARCHAR(100);
+begin
+   if (TRIM(plogin) IS NULL or LENGTH(TRIM(plogin)) < 1) then 
+    plogin_temp := pemail;
+    else  plogin_temp := plogin;
+  end if;
+
+select count(*) into i from USERS where UPPER(TRIM(EMAIL)) = UPPER(TRIM(pemail));
+  if (i > 0) then
+    RAISE_APPLICATION_ERROR(-10, 'Person with e-mail ' || pemail || ' already exists');
+  end if;
+ 
+select count(*) into j from USERS where UPPER(TRIM(LOGIN)) = UPPER(TRIM(plogin));
+  if (j > 0) then
+    RAISE_APPLICATION_ERROR(-11, 'This login is already used');
+  end if;
+  
+phash := DBMS_CRYPTO.Hash ( UTL_I18N.STRING_TO_RAW (pswd, 'AL32UTF8'), 2);
+
+p_id := sec_user.nextval;
+  
+  insert into USERS(USER_ID,LOGIN,EMAIL,NAME,PASSWORD_HASH)
+  values (p_id, plogin_temp, pemail, pname, phash);
+end pAddUser;
