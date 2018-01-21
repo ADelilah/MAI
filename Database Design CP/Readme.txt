@@ -11,3 +11,5 @@ JAVA PART:
 Console
 
 Use whatever you want to open the content or ask Eugene for student license for both (recommended). 
+
+!!!Rewrite project idea and scenarios or he will notice!!!
