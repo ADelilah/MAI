@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  {% if session.logged_in %}
+     <dl class=show_actives>
+      {% if entries %}
+      {% for entry in entries %}
+         <dd> ________________________________
+         <dd>{{entry.ty}} *** {{entry.s}}
+         <dd><a href="{{ url_for('single_activ', act_id=entry.id) }}">{{entry.t|safe}}</a>
+      {% endfor %}
+      {% else %}
+         <dd><em> Nothing happens @Home, try to increase the distance</em>
+      {% endif %}
+     </dl>
+  {% endif %}
+{% endblock %}

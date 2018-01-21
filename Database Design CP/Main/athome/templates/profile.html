@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <dl class=profile>
+    <dd><h2>{{ profile.n|safe}}</h2>
+    <dd>{{profile.ph}}
+    <dd>Name: {{profile.f|safe}}
+    <dd>Phone: +{{profile.c}}{{profile.p|safe}}
+    <dd>Home: {{ profile.la|safe}}, {{ profile.lo|safe}}
+    <dd><a href="{{ url_for('settings') }}">Settings</a>
+  </dl>
+
+{% endblock %}

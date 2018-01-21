@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  {% if session.logged_in %}
+     <dl class=show_notifs>
+      {% if notifs %}
+      {% for n in notifs %}
+         <dd> ________________________________
+         <dd>{{n.d|safe}}
+         <dd>{{n.t|safe}}<a href="{{ url_for('single_activ', act_id=n.id) }}">{{n.ti|safe}}</a>
+      {% endfor %}
+      {% else %}
+         <dd><em>Your notifications will be displayed here</em>
+      {% endif %}
+     </dl>
+  {% endif %}
+{% endblock %}

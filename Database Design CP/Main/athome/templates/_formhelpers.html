@@ -1,0 +1,16 @@
+{# {% macro form_field(field) %}
+{{ field(placeholder=field.label.text) }}
+{% endmacro %}#}
+
+{% macro render_field(field) %}
+  <dt>{{ field.label }}
+  <dd>{{ field(**kwargs)|safe }} {# was field(self, **kwargs) #}
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </dd>
+{% endmacro %}

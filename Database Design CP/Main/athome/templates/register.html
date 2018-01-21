@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{#  {% from "_formhelpers.html" import render_field %}#}
+{% block body %}
+  <dl><dd><h2>Sign up</h2>
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    </dl>
+  <form action="{{ url_for('register') }}" method=post>
+   <dl>
+      <dd>Full Name
+      <dd>{{ form.fullname(placeholder='John Doe') }}
+       <dd><br>
+      <dd>Phone
+      <dd>{{ form.code}}
+      {{ form.phone(placeholder='111 111 1111') }}
+       <dd><br>
+      <dd>Password
+      <dd>{{ form.password(placeholder='Password') }}
+      {{ form.confirm(placeholder='Repeat password') }}
+      <dd><br>
+      <dd>{{ form.accept_tos(value=None)}} I accept Terms of Service
+       <dd><br>
+      <dd><input type=submit value=SignUp>
+    </dl>
+  </form>
+
+{% endblock %}

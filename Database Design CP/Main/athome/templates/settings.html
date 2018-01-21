@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    <form action="{{ url_for('settings') }}" prefix="form1" name="form1" method=post>
+    <dl>
+      <dd> Display name:
+      <dd>{{ form1.nickname(value=nn) }}
+      <dd> Full name:
+      <dd>{{ form1.fullname(value=fn) }}
+      <dd> Phone:
+      <dd>{{ form1.code(value=cr) }}
+      {{ form1.phone(value=pn) }}
+      <dd> ________________________________
+      <dd> Latitude:
+      <dd>{{ form1.latitude(value=la) }}
+      <dd> Longitude:
+      <dd>{{ form1.longitude(value=lo) }}
+      <dd> ________________________________
+      <dd>{{ form1.submit }}
+      <dt>
+    </dl>
+  </form>
+  <form action="{{ url_for('settings') }}" prefix="form2" method=post>
+    <dl><dd><input type=submit name="btn" value=LOGOUT></dl>
+  </form>
+{% endblock %}

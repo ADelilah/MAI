@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if error1 %}<p class=error><strong>Error:</strong> {{ error1 }}{% endif %}
+    {% if error2 %}<p class=error><strong>Error:</strong> {{ error2 }}{% endif %}
+
+  <dl class=single_activ>
+    <dd>{{ activity.ty }} *** {{ activity.s }} - {{ activity.e }}
+    <dd><h2>{{ activity.t|safe}}</h2>
+    <dd>By: {{ activity.u|safe }}
+    <dd>{{ activity.ph }}
+    <dd>{{ activity.d|safe }}
+    <dd>Location: {{ activity.la|safe}}, {{ activity.lo|safe}}
+    <dd> ___________________________________________
+    <dd>{{ activity.j|safe }} joined
+    {% if joined %} (You're going) {% else %}
+    <form action="{{ url_for('single_activ', act_id=activity.id) }}" prefix="form2" method=post>
+      <input type=submit name='btn' value=JOIN>
+  </form>{% endif %}
+     <dd> ___________________________________________
+    <dd>{{ activity.c|safe }} {{ word|safe }}
+    <dd> <br>
+    {% if comments %}{% for c in comments %}
+         <dd><h4>{{c.u|safe}}</h4>
+         <dd>{{c.d|safe}}
+         <dd>{{c.t|safe}}
+         <dd> ___________________________________________
+    {% endfor %}{% endif %}
+<form action="{{ url_for('single_activ', act_id=activity.id) }}" method=post>
+        <dd><br>
+        <dd>{{ form.comment }}
+        <dd>{{ form.post }}
+</form>
+  </dl>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+<!doctype html>
+<title>@Home</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+  <dl class="metanav">
+  <dd><h1>@Home</h1>
+  {% if not session.logged_in %}
+    <dd><a href="{{ url_for('signin') }}">Login</a>
+    <a href="{{ url_for('register') }}">Sign up</a>
+  {% else %}
+    <dd><a href="{{ url_for('actives_list') }}">Activities</a>
+    <a href="{{ url_for('add') }}">Add</a>
+    <a href="{{ url_for('notifs') }}">Notifications</a>
+    <a href="{{ url_for('profile') }}">Profile</a>
+  {% endif %}
+  </dl>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>

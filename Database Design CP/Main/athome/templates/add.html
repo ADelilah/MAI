@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+  <form action="{{ url_for('add') }}" method=post class="add">
+    <dl>
+      <dd><h2>Add activity</h2>
+      <dd>Type:
+      <dd>{{ form.type }}
+      <dd>Title:
+      <dd>{{ form.title(rows=3, cols=40) }}
+      <dd>Description:
+      <dd>{{ form.description(rows=5, cols=40) }}
+      <dd>Starts:
+      <dd>{{ form.starts (class='datepicker', type='date')}}{{ form.start_time }}
+      <dd>Ends:
+      <dd>{{ form.ends (class='datepicker', type='date')}}{{ form.end_time }}
+      <dd> Latitude:
+      <dd>{{ form.latitude }}
+      <dd> Longitude:
+      <dd>{{ form.longitude }}
+      <dd>
+      <dd>{{ form.access }} Accessible for wheelchairs:
+      <dd> <br>
+      <dd>{{ form.submit }}
+    </dl>
+  </form>
+{% endblock %}
